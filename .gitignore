@@ -1,0 +1,6 @@
+so_long
+obj/
+obj_bonus/
+vgcore*
+*.dSYM
+.vscode/
