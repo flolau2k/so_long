@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/06/29 13:06:23 by flauer           ###   ########.fr       */
+/*   Updated: 2023/06/30 13:06:27 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # include <stdlib.h>
 # include "MLX42.h"
 # include "libft.h"
+
+# define WIDTH 1024
+# define HEIGHT 768
+
+typedef struct s_instance
+{
+	mlx_image_t *image;
+}	t_instance;
 
 
 

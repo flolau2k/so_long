@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 11:17:07 by flauer            #+#    #+#              #
-#    Updated: 2023/06/29 13:18:00 by flauer           ###   ########.fr        #
+#    Updated: 2023/06/30 12:07:35 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFT =		$(LIBFTDIR)/libft.a
 LIBMLX =	$(LIBMLXDIR)/build/libmlx42.a
 LIBS =		$(LIBFT) $(LIBMLX) -ldl -lglfw -pthread -lm
 
-INCLUDES =	-I./$(LIBMLXDIR)/include/MLX42 -I./$(LIBFTDIR)/include
+INCLUDES =	-I./$(LIBMLXDIR)/include/MLX42 -I./$(LIBFTDIR)/include -I./include
 
 OBJDIR =	obj
 SRCDIR =	src
