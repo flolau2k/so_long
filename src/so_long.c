@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/10 10:47:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/10 10:52:11 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 // 	}
 // }
 
-void ft_hook(void* param, mlx_image_t *image)
+void ft_hook(void* param)
 {
 	mlx_t* mlx = param;
 
@@ -56,7 +56,6 @@ int32_t main(int32_t argc, const char* argv[])
 {
 	mlx_t* mlx;
 	mlx_texture_t *texture = mlx_load_png("./assets/Player.png");
-	mlx_image_t *image;
 
 	// Gotta error check this stuff
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
@@ -64,7 +63,13 @@ int32_t main(int32_t argc, const char* argv[])
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (!(image = mlx_new_image(mlx, 128, 128)))
+	// if (!(image = mlx_new_image(mlx, 128, 128)))
+	// {
+	// 	mlx_close_window(mlx);
+	// 	puts(mlx_strerror(mlx_errno));
+	// 	return(EXIT_FAILURE);
+	// }
+	if (!(image = mlx_texture_to_image(mlx, texture)))
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));

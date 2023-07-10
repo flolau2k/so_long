@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/10 10:33:21 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/10 10:52:04 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define WIDTH 1024
 # define HEIGHT 768
+
+static mlx_image_t *image;
 
 typedef struct s_instance
 {
