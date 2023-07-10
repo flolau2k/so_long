@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
+#    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 11:17:07 by flauer            #+#    #+#              #
-#    Updated: 2023/06/30 12:07:35 by flauer           ###   ########.fr        #
+#    Updated: 2023/07/10 10:47:54 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFT =		$(LIBFTDIR)/libft.a
 LIBMLX =	$(LIBMLXDIR)/build/libmlx42.a
 LIBS =		$(LIBFT) $(LIBMLX) -ldl -lglfw -pthread -lm
 
-INCLUDES =	-I./$(LIBMLXDIR)/include/MLX42 -I./$(LIBFTDIR)/include -I./include
+INCLUDES =	-I$(LIBMLXDIR)/include -I$(LIBFTDIR)/include -Iinclude
 
 OBJDIR =	obj
 SRCDIR =	src
@@ -35,7 +35,7 @@ OBJ =		$(addprefix $(OBJDIR)/, $(FILES:%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(LIBMLX) $(OBJ)
-	$(CC) $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "built $(NAME)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
@@ -54,11 +54,11 @@ fclean: clean
 
 re:	fclean all
 
-$(LIBFT)/libft.a:
+$(LIBFT):
 	@git submodule update --init --recursive
 	@make -C $(@D)
 
-$(LIBMLX)/build/libmlx42.a:
+$(LIBMLX):
 	@git submodule update --init --recursive
 	@cd MLX42 && cmake -B build && cmake --build build -j4
 
