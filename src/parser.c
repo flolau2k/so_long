@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/11 14:30:56 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/11 15:08:03 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,19 @@ static bool	read_map_line(int file, int *num_lines, char ***map)
 		(*map)[*num_lines] = NULL;
 		return (true);
 	}
-	++*num_lines;
+	*num_lines++;
 	if (!read_map_line(file, num_lines, map))
 		return (false);
-	--*num_lines;
+	*num_lines--;
 	(*map)[*num_lines] = line;
 	return (true);
+}
+
+static bool	is_valid_char(char c)
+{
+	if (ft_strchr(VALID_CHARS, c))
+		return (true);
+	return (false);
 }
 
 static void	find_start_pos(t_instance *inst)
@@ -72,24 +79,31 @@ static void	check_paths(t_instance *inst)
 	}
 }
 
+static void	check_borders(t_instance *inst)
+{
+
+}
+
 static bool	check_map(t_instance *inst)
 {
 	if (!inst->map[0])
 		ft_err(inst, MAP_EMPTY);
-	
+	get_size(inst);
 	fill_rec(inst, '0', 'F', inst->ppos);
+	check_borders(inst);
 	check_paths(inst);
 }
 
-static bool	get_size(t_instance *inst)
+static void	get_size(t_instance *inst)
 {
 	inst->size = (t_point){.x = 0, .y = 0};
-	if (inst->map[0])
-		ft_strlen(inst->map[0]);
+	ft_strlen(inst->map[0]);
+	inst->size.y++;
 	while (inst->map[inst->size.y])
 	{
 		if (ft_strlen(inst->map[inst->size.y]) != inst->size.x)
 			ft_err(inst, MAP_INVALID);
+		inst->size.y++;
 	}
 }
 

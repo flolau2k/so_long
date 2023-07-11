@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/11 13:51:50 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/11 14:54:22 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define MAP_INVALID "Map is not valid!"
 # define MAP_EMPTY "Map is empty!"
 # define MAP_EXT "Map file is not a .ber file!"
+# define VALID_CHARS "01CEP"
 
 typedef struct	s_point
 {
