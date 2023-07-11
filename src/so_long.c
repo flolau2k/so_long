@@ -3,91 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/10 10:52:11 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/11 13:26:36 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// static mlx_image_t* image;
-
-// int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
-// {
-//     return (r << 24 | g << 16 | b << 8 | a);
-// }
-
-// void ft_randomize(void* param)
-// {
-// 	for (int32_t i = 0; i < image->width; ++i)
-// 	{
-// 		for (int32_t y = 0; y < image->height; ++y)
-// 		{
-// 			uint32_t color = ft_pixel(
-// 				rand() % 0xFF, // R
-// 				rand() % 0xFF, // G
-// 				rand() % 0xFF, // B
-// 				rand() % 0xFF  // A
-// 			);
-// 			mlx_put_pixel(image, i, y, color);
-// 		}
-// 	}
-// }
-
-void ft_hook(void* param)
+void	ft_hook(void *param)
 {
-	mlx_t* mlx = param;
+	t_instance	*inst;
 
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		image->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		image->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		image->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		image->instances[0].x += 5;
+	inst = param;
+	if (mlx_is_key_down(inst->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(inst->mlx);
+	if (mlx_is_key_down(inst->mlx, MLX_KEY_W))
+		inst->image->instances[0].y -= 5;
+	if (mlx_is_key_down(inst->mlx, MLX_KEY_S))
+		inst->image->instances[0].y += 5;
+	if (mlx_is_key_down(inst->mlx, MLX_KEY_A))
+		inst->image->instances[0].x -= 5;
+	if (mlx_is_key_down(inst->mlx, MLX_KEY_D))
+		inst->image->instances[0].x += 5;
 }
 
-int32_t main(int32_t argc, const char* argv[])
+int32_t	main(int32_t argc, const char *argv[])
 {
-	mlx_t* mlx;
-	mlx_texture_t *texture = mlx_load_png("./assets/Player.png");
+	t_instance	inst;
 
-	// Gotta error check this stuff
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	inst = (t_instance){.image = NULL, .mlx = NULL, .texture = NULL,
+						.map = NULL};
+	if (argc < 2)
+		return (EXIT_FAILURE);
+	inst = (t_instance){.texture = mlx_load_png("./assets/Player.png")};
+	inst.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	inst.image = mlx_texture_to_image(inst.mlx, inst.texture);
+	parse_map(argv[1], &inst);
+	if (!inst.mlx)
 	{
 		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
-	// if (!(image = mlx_new_image(mlx, 128, 128)))
-	// {
-	// 	mlx_close_window(mlx);
-	// 	puts(mlx_strerror(mlx_errno));
-	// 	return(EXIT_FAILURE);
-	// }
-	if (!(image = mlx_texture_to_image(mlx, texture)))
+	if (!inst.image || mlx_image_to_window(inst.mlx, inst.image, 0, 0) == -1)
 	{
-		mlx_close_window(mlx);
+		mlx_close_window(inst.mlx);
 		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
-	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	
-	// ft_randomize(mlx);
-
-	// mlx_loop_hook(mlx, ft_randomize, mlx);
-	mlx_loop_hook(mlx, &ft_hook, mlx);
-
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	mlx_loop_hook(inst.mlx, &ft_hook, &inst);
+	mlx_loop(inst.mlx);
+	mlx_terminate(inst.mlx);
 	return (EXIT_SUCCESS);
 }
