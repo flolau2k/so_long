@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/12 12:59:35 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/12 17:01:59 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ static void	check_start(t_instance *inst, t_point pos)
 
 	if (inst->map[pos.y][pos.x] == 'P' && !found)
 	{
-		inst->map[pos.y][pos.x] = '0';
-		inst->ppos = (t_point){.x = pos.x, .y = pos.y};
 		found = true;
+		inst->ppos = (t_point){.x = pos.x, .y = pos.y};
 	}
 	else if (inst->map[pos.y][pos.x] == 'P' && found)
 		ft_err(inst, MULT_START);
@@ -223,4 +222,5 @@ void	parse_map(const char *path, t_instance *inst)
 	read_map_line(file, &num_lines, &inst->map);
 	close(file);
 	check_map(inst);
+	free_map(&inst->map_cpy);
 }

@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 11:17:07 by flauer            #+#    #+#              #
-#    Updated: 2023/07/12 12:38:24 by flauer           ###   ########.fr        #
+#    Updated: 2023/07/12 17:20:24 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ OBJDIR =	obj
 SRCDIR =	src
 
 FILES =		so_long.c parser.c error.c helper.c
+HEADERS =	include/so_long.h
 
 SRC =		$(addprefix $(SRCDIR)/, $(FILES))
 OBJ =		$(addprefix $(OBJDIR)/, $(FILES:%.c=%.o))
@@ -38,7 +39,7 @@ $(NAME): $(LIBFT) $(LIBMLX) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "built $(NAME)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
 $(OBJDIR):
