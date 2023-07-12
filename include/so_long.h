@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/12 17:21:27 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/12 19:32:55 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIDTH 1024
 # define HEIGHT 768
 
-# define TILE_S 32
+# define TILE_S 48
 
 # define MULT_START "Multiple starting positions not allowed!"
 # define MULT_EXIT "Multiple exits are not allowed!"
