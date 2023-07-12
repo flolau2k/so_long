@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/12 12:40:45 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/12 15:02:15 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,34 @@
 # define MOVABLE_CHARS "0CE"
 # define FILL_CHAR 'F'
 
+# define PLAYER "./assets/Player.png"
+# define WALL "./assets/walls.png"
+# define FLOOR "./assets/floor.png"
+# define EXIT_O "./assets/wooden_door_open.png"
+# define EXIT_C "./assets/wooden_door_closed.png"
+# define COLL_O "./assets/chest_open.png"
+# define COLL_C "./assets/chest_closed.png"
+
 typedef struct	s_point
 {
 	int	x;
 	int	y;
 }	t_point;
 
+typedef struct s_img
+{
+	mlx_image_t	*wall;
+	mlx_image_t	*player;
+	mlx_image_t	*floor;
+	mlx_image_t	*exit_o;
+	mlx_image_t	*exit_c;
+	mlx_image_t	*coll_o;
+	mlx_image_t	*coll_c;
+}	t_img;
+
 typedef struct s_instance
 {
-	mlx_image_t		*image;
+	t_img			img;
 	mlx_t			*mlx;
 	mlx_texture_t	*texture;
 	char			**map;
