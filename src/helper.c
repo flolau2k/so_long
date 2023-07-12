@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:51:38 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/11 12:53:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/12 12:42:24 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	free_map(char ***map)
 	int	i;
 
 	i = 0;
-	while (*map[i])
+	while ((*map)[i])
 	{
-		free(*map[i]);
+		free((*map)[i]);
 		++i;
 	}
 	free(*map);

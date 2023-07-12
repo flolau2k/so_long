@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/11 13:26:36 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/12 12:37:42 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int32_t	main(int32_t argc, const char *argv[])
 	t_instance	inst;
 
 	inst = (t_instance){.image = NULL, .mlx = NULL, .texture = NULL,
-						.map = NULL};
+						.map = NULL, .map_cpy = NULL};
 	if (argc < 2)
 		return (EXIT_FAILURE);
-	inst = (t_instance){.texture = mlx_load_png("./assets/Player.png")};
+	parse_map(argv[1], &inst);
+	inst.texture = mlx_load_png("./assets/Player.png");
 	inst.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	inst.image = mlx_texture_to_image(inst.mlx, inst.texture);
-	parse_map(argv[1], &inst);
 	if (!inst.mlx)
 	{
 		puts(mlx_strerror(mlx_errno));
