@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:41:12 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 14:12:59 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 16:31:15 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,13 @@ void	put_image_to_window(t_instance *inst, t_point pos)
 	else if (c == COLL_CHAR)
 	{
 		my_im_to_window(inst, inst->img.floor, pos);
+		my_im_to_window(inst, inst->img.coll_o, pos);
 		my_im_to_window(inst, inst->img.coll_c, pos);
 	}
 	else if (c == EXIT_CHAR)
 	{
 		my_im_to_window(inst, inst->img.floor, pos);
+		my_im_to_window(inst, inst->img.exit_o, pos);
 		my_im_to_window(inst, inst->img.exit_c, pos);
 	}
 }

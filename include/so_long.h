@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 14:28:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 16:56:15 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define HEIGHT 768
 
 # define TILE_S 48
+# define SENSITIVITY 9
 
 # define MULT_START "Multiple starting positions not allowed!"
 # define MULT_EXIT "Multiple exits are not allowed!"
@@ -100,6 +101,7 @@ static void	fill_rec(t_instance *inst, t_point begin);
 // helper.c
 void	free_map(char ***map);
 bool	is_valid_char(char c);
+bool	compare_points(t_point p1, t_point p2);
 
 //error.c
 void	ft_err(t_instance *inst, const char *message);
