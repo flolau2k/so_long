@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/12 19:32:55 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 09:19:22 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,23 @@
 # define COLL_O "./assets/chest_open.png"
 # define COLL_C "./assets/chest_closed.png"
 
+// for map points
 typedef struct	s_point
 {
 	int	x;
 	int	y;
 }	t_point;
+
+// for pixel coordinates
+typedef t_point t_coord;
+
+typedef struct s_bounds
+{
+	t_point	ul;
+	t_point	ll;
+	t_point	ur;
+	t_point	lr;
+}	t_bounds;
 
 typedef struct s_img
 {
@@ -80,6 +92,7 @@ typedef struct s_instance
 	char			**map_cpy;
 	t_point			size;
 	t_point			ppos;
+	t_point			psize;
 }	t_instance;
 
 // parser.c

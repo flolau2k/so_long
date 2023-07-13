@@ -3,23 +3,85 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/12 19:46:28 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 10:05:33 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	move_player(t_instance *inst, t_point pos)
+t_point	px_to_pos(t_coord px)
 {
-	if (!ft_strchr(MOVABLE_CHARS, inst->map[inst->ppos.y + pos.y][inst->ppos.x + pos.x]))
-		return ;
-	inst->ppos.y = inst->ppos.y + pos.y;
-	inst->ppos.x = inst->ppos.x + pos.x;
-	inst->img.player->instances[0].x += pos.x * TILE_S;
-	inst->img.player->instances[0].y += pos.y * TILE_S;
+	t_point	pos;
+
+	pos.x = px.x / TILE_S;
+	pos.y = px.y / TILE_S;
+	return (pos);
+}
+
+t_point	pos_to_px(t_point pos)
+{
+	t_point	px;
+
+	px.x = pos.x * TILE_S;
+	px.y = pos.y * TILE_S;
+	return (px);
+}
+
+t_point	add_pos(t_point p1, t_point p2)
+{
+	t_point	ret;
+
+	ret.x = p1.x + p2.x;
+	ret.y = p1.y + p2.y;
+	return (ret);
+}
+
+bool	movable(t_instance *inst, t_point px)
+{
+	t_point	map_pos;
+
+	map_pos = px_to_pos(px);
+	if (!ft_strchr(MOVABLE_CHARS, inst->map[map_pos.y][map_pos.x]))
+		return (false);
+	return (true);
+}
+
+bool	check_bounds(t_instance *inst, t_coord	pos)
+{
+	t_bounds	pb;
+
+	pb.ul = (t_coord){.x = pos.x, .y = pos.y};
+	pb.ll = add_pos(pb.ul, (t_coord){.x = 0, .y = inst->psize.y});
+	pb.ur = add_pos(pb.ul, (t_coord){.x = inst->psize.x, .y = 0});
+	pb.lr = add_pos(pb.ul, inst->psize);
+	if (movable(inst, pb.ul) && movable(inst, pb.ll)
+		&& movable(inst, pb.ur) && movable(inst, pb.lr))
+		return (true);
+	return (false);
+}
+
+void	get_psize(t_instance *inst)
+{
+	inst->psize.x = inst->img.player->width;
+	inst->psize.y = inst->img.player->height;
+}
+
+void	move_player(t_instance *inst, t_coord step)
+{
+	t_point	oldpos;
+	t_point	newpos;
+
+	oldpos.x = inst->img.player->instances[0].x;
+	oldpos.y = inst->img.player->instances[0].y;
+	newpos = add_pos(oldpos, step);
+	if (check_bounds(inst, newpos))
+	{
+		inst->img.player->instances[0].x = newpos.x;
+		inst->img.player->instances[0].y = newpos.y;
+	}
 }
 
 void	ft_hook(void *param)
@@ -31,16 +93,16 @@ void	ft_hook(void *param)
 		mlx_close_window(inst->mlx);
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_W))
 		//inst->img.player->instances[0].y -= 5;
-		move_player(inst, (t_point){.x = 0, .y = -1});
+		move_player(inst, (t_coord){.x = 0, .y = -5});
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_S))
 		// inst->img.player->instances[0].y += 5;
-		move_player(inst, (t_point){.x = 0, .y = 1});
+		move_player(inst, (t_coord){.x = 0, .y = 5});
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_A))
 		// inst->img.player->instances[0].x -= 5;
-		move_player(inst, (t_point){.x = -1, .y = 0});
+		move_player(inst, (t_coord){.x = -5, .y = 0});
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_D))
 		// inst->img.player->instances[0].x += 5;
-		move_player(inst, (t_point){.x = 1, .y = 0});
+		move_player(inst, (t_coord){.x = 5, .y = 0});
 }
 
 mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size)
@@ -71,9 +133,9 @@ void	load_images(t_instance *inst)
 	inst->img.coll_o	= png_to_image(inst, COLL_O, TILE_S);
 }
 
-void	my_image_to_window(t_instance *inst, mlx_image_t *img, t_point pos)
+void	my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos, int s)
 {
-	if (mlx_image_to_window(inst->mlx, img, pos.x * TILE_S, pos.y * TILE_S) == -1)
+	if (mlx_image_to_window(inst->mlx, img, pos.x * s, pos.y * s) == -1)
 		ft_err(inst, mlx_strerror(mlx_errno));
 }
 
@@ -83,18 +145,18 @@ void	put_image_to_window(t_instance *inst, t_point pos)
 
 	c = inst->map[pos.y][pos.x];
 	if (c == FLOOR_CHAR || c == PLAYER_CHAR)
-		my_image_to_window(inst, inst->img.floor, pos);
+		my_im_to_window(inst, inst->img.floor, pos, TILE_S);
 	else if (c == WALL_CHAR)
-		my_image_to_window(inst, inst->img.wall, pos);
+		my_im_to_window(inst, inst->img.wall, pos, TILE_S);
 	else if (c == COLL_CHAR)
 	{
-		my_image_to_window(inst, inst->img.floor, pos);
-		my_image_to_window(inst, inst->img.coll_c, pos);
+		my_im_to_window(inst, inst->img.floor, pos, TILE_S);
+		my_im_to_window(inst, inst->img.coll_c, pos, TILE_S);
 	}
 	else if (c == EXIT_CHAR)
 	{
-		my_image_to_window(inst, inst->img.floor, pos);
-		my_image_to_window(inst, inst->img.exit_c, pos);
+		my_im_to_window(inst, inst->img.floor, pos, TILE_S);
+		my_im_to_window(inst, inst->img.exit_c, pos, TILE_S);
 	}
 }
 
@@ -113,12 +175,12 @@ void	render_map(t_instance *inst)
 		}
 		pos.y++;
 	}
-	my_image_to_window(inst, inst->img.player, inst->ppos);
+	my_im_to_window(inst, inst->img.player, inst->ppos, TILE_S);
 }
 
 void	init_mlx(t_instance *inst)
 {
-	inst->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	inst->mlx = mlx_init(WIDTH, HEIGHT, "So long", true);
 	if (!inst->mlx)
 		ft_err(inst, mlx_strerror(mlx_errno));
 }
@@ -133,6 +195,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	parse_map(argv[1], &inst);
 	init_mlx(&inst);
 	load_images(&inst);
+	get_psize(&inst);
 	render_map(&inst);
 	mlx_loop_hook(inst.mlx, &ft_hook, &inst);
 	mlx_loop(inst.mlx);
