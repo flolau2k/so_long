@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 14:15:10 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:14:35 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static void	check_start(t_instance *inst, t_point pos)
 {
 	static bool	found;
 
-	if (inst->map[pos.y][pos.x] == 'P' && !found)
+	if (inst->map[pos.y][pos.x] == PLAYER_CHAR && !found)
 	{
 		found = true;
 		inst->ppos = (t_point){.x = pos.x, .y = pos.y};
 	}
-	else if (inst->map[pos.y][pos.x] == 'P' && found)
+	else if (inst->map[pos.y][pos.x] == PLAYER_CHAR && found)
 		ft_err(inst, MULT_START);
 }
 
@@ -51,10 +51,16 @@ static void	check_exit(t_instance *inst, t_point pos)
 {
 	static bool	found;
 
-	if (inst->map[pos.y][pos.x] == 'E' && !found)
+	if (inst->map[pos.y][pos.x] == EXIT_CHAR && !found)
 		found = true;
-	else if (inst->map[pos.y][pos.x] == 'E' && found)
+	else if (inst->map[pos.y][pos.x] == EXIT_CHAR && found)
 		ft_err(inst, MULT_EXIT);
+}
+
+static void	count_collectibles(t_instance *inst, t_point pos)
+{
+	if (inst->map[pos.y][pos.x] == COLL_CHAR)
+		inst->num_c++;
 }
 
 static void	find_start_pos_and_check(t_instance *inst)
@@ -73,6 +79,7 @@ static void	find_start_pos_and_check(t_instance *inst)
 				ft_err(inst, INV_CHAR);
 			check_start(inst, pos);
 			check_exit(inst, pos);
+			count_collectibles(inst, pos);
 			pos.x++;
 		}
 		pos.y++;
@@ -91,7 +98,7 @@ static void	check_surrounding(t_instance *inst, t_point pos)
 		return ;
 	if (pos.x < inst->size.x - 1 && inst->map_cpy[pos.y][pos.x + 1] == FILL_CHAR)
 		return ;
-	if (inst->map_cpy[pos.y][pos.x] == 'C')
+	if (inst->map_cpy[pos.y][pos.x] == COLL_CHAR)
 		ft_err(inst, NO_ROUTE_C);
 	else
 		ft_err(inst, NO_ROUTE_E);

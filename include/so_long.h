@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 16:56:15 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:57:05 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,20 @@ typedef struct s_img
 	mlx_image_t	*exit_c;
 	mlx_image_t	*coll_o;
 	mlx_image_t	*coll_c;
+	mlx_image_t	*info;
 }	t_img;
 
 typedef struct s_instance
 {
-	t_img			img;
-	mlx_t			*mlx;
-	char			**map;
-	char			**map_cpy;
-	t_point			size;
-	t_point			ppos;
-	t_point			psize;
+	t_img	img;
+	mlx_t	*mlx;
+	char	**map;
+	char	**map_cpy;
+	t_point	size;
+	t_point	ppos;
+	t_point	psize;
+	int		num_c;
+	bool	won;
 }	t_instance;
 
 // parser.c
@@ -122,5 +125,8 @@ mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size);
 void		load_images(t_instance *inst);
 void		my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos);
 void		put_image_to_window(t_instance *inst, t_point pos);
+
+// so_long.c
+void	game_over(t_instance *inst);
 
 #endif

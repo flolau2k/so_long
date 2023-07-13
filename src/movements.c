@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:38:04 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 17:01:27 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:38:40 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	collect_item(t_instance *inst, t_point pos)
 		if (compare_points(px_to_pos(px), pos))
 		{
 			inst->img.coll_c->instances[i].enabled = false;
-			inst->map[pos.y][pos.x] = '0';
+			inst->map[pos.y][pos.x] = FLOOR_CHAR;
+			inst->num_c--;
 		}
 		i++;
 	}
@@ -48,7 +49,15 @@ void	collectible(t_instance *inst, t_point px)
 	map_pos = px_to_pos(px);
 	if (inst->map[map_pos.y][map_pos.x] == COLL_CHAR)
 		collect_item(inst, map_pos);
-	return ;
+}
+
+void	is_exit(t_instance *inst, t_point px)
+{
+	t_point	map_pos;
+
+	map_pos = px_to_pos(px);
+	if (inst->map[map_pos.y][map_pos.x] == EXIT_CHAR)
+		game_over(inst);
 }
 
 bool	check_bounds(t_instance *inst, t_point	pos)
@@ -79,6 +88,23 @@ void	check_collectibles(t_instance *inst, t_point pos)
 	collectible(inst, pb.lr);
 }
 
+void	check_exit(t_instance *inst, t_point pos)
+{
+	t_bounds	pb;
+
+	if (inst->num_c > 0)
+		return ;
+	inst->img.exit_c->instances[0].enabled = false;
+	pb.ul = (t_point){.x = pos.x, .y = pos.y};
+	pb.ll = add_pos(pb.ul, (t_point){.x = 0, .y = inst->psize.y});
+	pb.ur = add_pos(pb.ul, (t_point){.x = inst->psize.x, .y = 0});
+	pb.lr = add_pos(pb.ul, inst->psize);
+	is_exit(inst, pb.ul);
+	is_exit(inst, pb.ll);
+	is_exit(inst, pb.ur);
+	is_exit(inst, pb.lr);
+}
+
 void	move_player(t_instance *inst, t_point step)
 {
 	t_point	oldpos;
@@ -93,4 +119,5 @@ void	move_player(t_instance *inst, t_point step)
 		inst->img.player->instances[0].y = newpos.y;
 	}
 	check_collectibles(inst, newpos);
+	check_exit(inst, newpos);
 }
