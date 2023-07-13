@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 10:54:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 13:43:34 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,22 @@ void	free_map(char ***map);
 
 //error.c
 void	ft_err(t_instance *inst, const char *message);
+
+// movements.c
+bool	movable(t_instance *inst, t_point px);
+bool	check_bounds(t_instance *inst, t_point	pos);
+void	move_player(t_instance *inst, t_point step);
+
+// conversions.c
+t_point	px_to_pos(t_point px);
+t_point	pos_to_px(t_point pos);
+t_point	add_pos(t_point p1, t_point p2);
+
+// window.c
+void		init_mlx(t_instance *inst);
+mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size);
+void		load_images(t_instance *inst);
+void		my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos);
+void		put_image_to_window(t_instance *inst, t_point pos);
 
 #endif

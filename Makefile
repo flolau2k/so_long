@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 11:17:07 by flauer            #+#    #+#              #
-#    Updated: 2023/07/12 17:20:24 by flauer           ###   ########.fr        #
+#    Updated: 2023/07/13 13:43:40 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ INCLUDES =	-I$(LIBMLXDIR)/include -I$(LIBFTDIR)/include -Iinclude
 OBJDIR =	obj
 SRCDIR =	src
 
-FILES =		so_long.c parser.c error.c helper.c
+FILES =		so_long.c parser.c error.c helper.c movements.c conversions.c \
+			window.c
 HEADERS =	include/so_long.h
 
 SRC =		$(addprefix $(SRCDIR)/, $(FILES))
