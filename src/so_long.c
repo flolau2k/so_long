@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 10:05:33 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 10:55:14 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_point	px_to_pos(t_coord px)
+t_point	px_to_pos(t_point px)
 {
 	t_point	pos;
 
@@ -49,13 +49,13 @@ bool	movable(t_instance *inst, t_point px)
 	return (true);
 }
 
-bool	check_bounds(t_instance *inst, t_coord	pos)
+bool	check_bounds(t_instance *inst, t_point	pos)
 {
 	t_bounds	pb;
 
-	pb.ul = (t_coord){.x = pos.x, .y = pos.y};
-	pb.ll = add_pos(pb.ul, (t_coord){.x = 0, .y = inst->psize.y});
-	pb.ur = add_pos(pb.ul, (t_coord){.x = inst->psize.x, .y = 0});
+	pb.ul = (t_point){.x = pos.x, .y = pos.y};
+	pb.ll = add_pos(pb.ul, (t_point){.x = 0, .y = inst->psize.y});
+	pb.ur = add_pos(pb.ul, (t_point){.x = inst->psize.x, .y = 0});
 	pb.lr = add_pos(pb.ul, inst->psize);
 	if (movable(inst, pb.ul) && movable(inst, pb.ll)
 		&& movable(inst, pb.ur) && movable(inst, pb.lr))
@@ -69,7 +69,7 @@ void	get_psize(t_instance *inst)
 	inst->psize.y = inst->img.player->height;
 }
 
-void	move_player(t_instance *inst, t_coord step)
+void	move_player(t_instance *inst, t_point step)
 {
 	t_point	oldpos;
 	t_point	newpos;
@@ -92,17 +92,13 @@ void	ft_hook(void *param)
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(inst->mlx);
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_W))
-		//inst->img.player->instances[0].y -= 5;
-		move_player(inst, (t_coord){.x = 0, .y = -5});
+		move_player(inst, (t_point){.x = 0, .y = -5});
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_S))
-		// inst->img.player->instances[0].y += 5;
-		move_player(inst, (t_coord){.x = 0, .y = 5});
+		move_player(inst, (t_point){.x = 0, .y = 5});
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_A))
-		// inst->img.player->instances[0].x -= 5;
-		move_player(inst, (t_coord){.x = -5, .y = 0});
+		move_player(inst, (t_point){.x = -5, .y = 0});
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_D))
-		// inst->img.player->instances[0].x += 5;
-		move_player(inst, (t_coord){.x = 5, .y = 0});
+		move_player(inst, (t_point){.x = 5, .y = 0});
 }
 
 mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size)
@@ -133,9 +129,10 @@ void	load_images(t_instance *inst)
 	inst->img.coll_o	= png_to_image(inst, COLL_O, TILE_S);
 }
 
-void	my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos, int s)
+void	my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos)
 {
-	if (mlx_image_to_window(inst->mlx, img, pos.x * s, pos.y * s) == -1)
+	if (mlx_image_to_window(inst->mlx, img,
+		pos.x * TILE_S, pos.y * TILE_S) == -1)
 		ft_err(inst, mlx_strerror(mlx_errno));
 }
 
@@ -145,18 +142,18 @@ void	put_image_to_window(t_instance *inst, t_point pos)
 
 	c = inst->map[pos.y][pos.x];
 	if (c == FLOOR_CHAR || c == PLAYER_CHAR)
-		my_im_to_window(inst, inst->img.floor, pos, TILE_S);
+		my_im_to_window(inst, inst->img.floor, pos);
 	else if (c == WALL_CHAR)
-		my_im_to_window(inst, inst->img.wall, pos, TILE_S);
+		my_im_to_window(inst, inst->img.wall, pos);
 	else if (c == COLL_CHAR)
 	{
-		my_im_to_window(inst, inst->img.floor, pos, TILE_S);
-		my_im_to_window(inst, inst->img.coll_c, pos, TILE_S);
+		my_im_to_window(inst, inst->img.floor, pos);
+		my_im_to_window(inst, inst->img.coll_c, pos);
 	}
 	else if (c == EXIT_CHAR)
 	{
-		my_im_to_window(inst, inst->img.floor, pos, TILE_S);
-		my_im_to_window(inst, inst->img.exit_c, pos, TILE_S);
+		my_im_to_window(inst, inst->img.floor, pos);
+		my_im_to_window(inst, inst->img.exit_c, pos);
 	}
 }
 
@@ -175,14 +172,23 @@ void	render_map(t_instance *inst)
 		}
 		pos.y++;
 	}
-	my_im_to_window(inst, inst->img.player, inst->ppos, TILE_S);
+	my_im_to_window(inst, inst->img.player, inst->ppos);
 }
 
 void	init_mlx(t_instance *inst)
 {
-	inst->mlx = mlx_init(WIDTH, HEIGHT, "So long", true);
+	inst->mlx = mlx_init(WIDTH, HEIGHT, "So long ...", true);
 	if (!inst->mlx)
 		ft_err(inst, mlx_strerror(mlx_errno));
+}
+
+void	render_info(t_instance *inst)
+{
+	static mlx_image_t	*info;
+
+	if (info)
+		mlx_delete_image(inst->mlx, info);
+	info = mlx_put_string(inst->mlx, "hallo test", 0, 0);
 }
 
 int32_t	main(int32_t argc, const char *argv[])
@@ -197,6 +203,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	load_images(&inst);
 	get_psize(&inst);
 	render_map(&inst);
+	render_info(&inst);
 	mlx_loop_hook(inst.mlx, &ft_hook, &inst);
 	mlx_loop(inst.mlx);
 	mlx_terminate(inst.mlx);

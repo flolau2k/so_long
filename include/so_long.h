@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 09:19:22 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 10:54:02 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,6 @@ typedef struct	s_point
 	int	x;
 	int	y;
 }	t_point;
-
-// for pixel coordinates
-typedef t_point t_coord;
 
 typedef struct s_bounds
 {
