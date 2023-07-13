@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 13:42:35 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 13:57:42 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,27 @@ void	get_psize(t_instance *inst)
 	inst->psize.y = inst->img.player->height;
 }
 
+void	render_info(t_instance *inst)
+{
+	static mlx_image_t	*info;
+	char				*msg;
+	char				*fps;
+
+	fps = ft_itoa(1/inst->mlx->delta_time);
+	msg = ft_strjoin(fps, " FPS");
+	if (info)
+		mlx_delete_image(inst->mlx, info);
+	info = mlx_put_string(inst->mlx, msg, 0, 0);
+	free(msg);
+	free(fps);
+}
+
 void	ft_hook(void *param)
 {
 	t_instance	*inst;
 
 	inst = param;
+	render_info(inst);
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(inst->mlx);
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_W))
@@ -53,16 +69,6 @@ void	render_map(t_instance *inst)
 	my_im_to_window(inst, inst->img.player, inst->ppos);
 }
 
-void	render_info(t_instance *inst)
-{
-	static mlx_image_t	*info;
-	char				*msg;
-
-	if (info)
-		mlx_delete_image(inst->mlx, info);
-	info = mlx_put_string(inst->mlx, "hallo test", 0, 0);
-}
-
 int32_t	main(int32_t argc, const char *argv[])
 {
 	t_instance	inst;
@@ -75,7 +81,6 @@ int32_t	main(int32_t argc, const char *argv[])
 	load_images(&inst);
 	get_psize(&inst);
 	render_map(&inst);
-	render_info(&inst);
 	mlx_loop_hook(inst.mlx, &ft_hook, &inst);
 	mlx_loop(inst.mlx);
 	mlx_terminate(inst.mlx);

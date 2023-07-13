@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:41:12 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 13:42:29 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 14:12:59 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size)
 
 void	load_images(t_instance *inst)
 {
-	inst->img.player	= png_to_image(inst, PLAYER, 0);
+	inst->img.player	= png_to_image(inst, PLAYER, TILE_S * 0.9);
 	inst->img.wall		= png_to_image(inst, WALL, TILE_S);
 	inst->img.floor		= png_to_image(inst, FLOOR, TILE_S);
 	inst->img.exit_c	= png_to_image(inst, EXIT_C, TILE_S);

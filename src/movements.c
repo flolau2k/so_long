@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:38:04 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 13:39:55 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 14:28:19 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ bool	movable(t_instance *inst, t_point px)
 
 	map_pos = px_to_pos(px);
 	if (!ft_strchr(MOVABLE_CHARS, inst->map[map_pos.y][map_pos.x]))
+		return (false);
+	return (true);
+}
+
+bool	collectible(t_instance *inst, t_point px)
+{
+	t_point	map_pos;
+
+	map_pos = px_to_pos(px);
+	if (!inst->map[map_pos.y][map_pos.x] != COLL_CHAR)
 		return (false);
 	return (true);
 }
@@ -36,6 +46,11 @@ bool	check_bounds(t_instance *inst, t_point	pos)
 	return (false);
 }
 
+void	check_collectibles(t_instance *inst, t_point pos)
+{
+	
+}
+
 void	move_player(t_instance *inst, t_point step)
 {
 	t_point	oldpos;
@@ -49,4 +64,5 @@ void	move_player(t_instance *inst, t_point step)
 		inst->img.player->instances[0].x = newpos.x;
 		inst->img.player->instances[0].y = newpos.y;
 	}
+	check_collectibles(inst, newpos);
 }

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/12 17:01:59 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/13 14:15:10 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ static bool	read_map_line(int file, int *num_lines, char ***map)
 	(*map)[*num_lines] = ft_strtrim(line, "\n");
 	free(line);
 	return (true);
-}
-
-static bool	is_valid_char(char c)
-{
-	if (ft_strchr(VALID_CHARS, c))
-		return (true);
-	return (false);
 }
 
 static void	check_start(t_instance *inst, t_point pos)
