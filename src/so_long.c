@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 18:02:25 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 09:05:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	ft_hook(void *param)
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(inst->mlx);
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_W))
-		move_player(inst, (t_point){.x = 0, .y = -SENSITIVITY});
+		move(inst, (t_point){.x = 0, .y = -SENSITIVITY});
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_S))
-		move_player(inst, (t_point){.x = 0, .y = SENSITIVITY});
+		move(inst, (t_point){.x = 0, .y = SENSITIVITY});
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_A))
-		move_player(inst, (t_point){.x = -SENSITIVITY, .y = 0});
+		move(inst, (t_point){.x = -SENSITIVITY, .y = 0});
 	if (mlx_is_key_down(inst->mlx, MLX_KEY_D))
-		move_player(inst, (t_point){.x = SENSITIVITY, .y = 0});
+		move(inst, (t_point){.x = SENSITIVITY, .y = 0});
 }
 
 void	render_map(t_instance *inst)

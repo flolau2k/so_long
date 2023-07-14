@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 17:14:35 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 09:13:47 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,21 @@ static void	check_paths(t_instance *inst)
 	}
 }
 
+static void	fill_rec(t_instance *inst, t_point begin)
+{
+	if (!ft_strchr(MOVABLE_CHARS, inst->map_cpy[begin.y][begin.x]))
+		return ;
+	inst->map_cpy[begin.y][begin.x] = FILL_CHAR;
+	if (begin.y > 0)
+		fill_rec(inst, (t_point){.x = begin.x, .y = begin.y - 1});
+	if (begin.y < inst->size.y - 1)
+		fill_rec(inst, (t_point){.x = begin.x, .y = begin.y + 1});
+	if (begin.x > 0)
+		fill_rec(inst, (t_point){.x = begin.x - 1, .y = begin.y});
+	if (begin.x < inst->size.x - 1)
+		fill_rec(inst, (t_point){.x = begin.x + 1, .y = begin.y});
+}
+
 static void	check_borders(t_instance *inst)
 {
 	t_point	pos;
@@ -193,21 +208,6 @@ static void	check_map(t_instance *inst)
 	check_paths(inst);
 }
 
-static void	fill_rec(t_instance *inst, t_point begin)
-{
-	if (!ft_strchr(MOVABLE_CHARS, inst->map_cpy[begin.y][begin.x]))
-		return ;
-	inst->map_cpy[begin.y][begin.x] = FILL_CHAR;
-	if (begin.y > 0)
-		fill_rec(inst, (t_point){.x = begin.x, .y = begin.y - 1});
-	if (begin.y < inst->size.y - 1)
-		fill_rec(inst, (t_point){.x = begin.x, .y = begin.y + 1});
-	if (begin.x > 0)
-		fill_rec(inst, (t_point){.x = begin.x - 1, .y = begin.y});
-	if (begin.x < inst->size.x - 1)
-		fill_rec(inst, (t_point){.x = begin.x + 1, .y = begin.y});
-}
-
 void	parse_map(const char *path, t_instance *inst)
 {
 	int		file;
@@ -223,4 +223,5 @@ void	parse_map(const char *path, t_instance *inst)
 	close(file);
 	check_map(inst);
 	free_map(&inst->map_cpy);
+	inst->rel_map_pos = (t_point){.x = 0, .y = 0};
 }
