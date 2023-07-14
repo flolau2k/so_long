@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:38:04 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 11:01:29 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 11:55:43 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	movable(t_instance *inst, t_point px)
 
 void	collect_item(t_instance *inst, t_point pos)
 {
-	int		i;
+	size_t		i;
 	t_point	px;
 
 	i = 0;
@@ -106,15 +106,22 @@ void	check_exit(t_instance *inst, t_point pos)
 	is_exit(inst, pb.lr);
 }
 
-void	move_all_instances(mlx_image_t *img, t_point step)
+void	move_all_instances(t_instance *inst, mlx_image_t *img, t_point step)
 {
-	int	i;
+	size_t	i;
+	// t_point	new_px;
 
 	i = 0;
 	while (i < img->count)
 	{
 		img->instances[i].x -= step.x;
 		img->instances[i].y -= step.y;
+		// new_px.x = img->instances[i].x;
+		// new_px.y = img->instances[i].y;
+		// if (img->instances[i].enabled && !in_window(inst, img, new_px))
+		// 	img->instances[i].enabled = false;
+		// else if (!img->instances[i].enabled && in_window(inst, img, new_px))
+		// 	img->instances[i].enabled = true;
 		i++;
 	}
 }
@@ -123,12 +130,12 @@ void	move_map(t_instance *inst, t_point step)
 {
 	inst->rel_map_pos.x += step.x;
 	inst->rel_map_pos.y += step.y;
-	move_all_instances(inst->img.coll_c, step);
-	move_all_instances(inst->img.coll_o, step);
-	move_all_instances(inst->img.exit_c, step);
-	move_all_instances(inst->img.exit_o, step);
-	move_all_instances(inst->img.floor, step);
-	move_all_instances(inst->img.wall, step);
+	move_all_instances(inst, inst->img.coll_c, step);
+	move_all_instances(inst, inst->img.coll_o, step);
+	move_all_instances(inst, inst->img.exit_c, step);
+	move_all_instances(inst, inst->img.exit_o, step);
+	move_all_instances(inst, inst->img.floor, step);
+	move_all_instances(inst, inst->img.wall, step);
 }
 
 void	move_player(t_instance *inst, t_point step)
@@ -164,6 +171,11 @@ void	dec_move(t_instance *inst, t_point step)
 	}
 }
 
+void	put_moves(t_instance *inst)
+{
+	ft_printf("Move count: %u\n", inst->moves);
+}
+
 void	move(t_instance *inst, t_point step)
 {
 	t_point	oldpos;
@@ -173,7 +185,11 @@ void	move(t_instance *inst, t_point step)
 	oldpos.y = inst->img.player->instances[0].y;
 	newpos = add_pos(oldpos, step);
 	if (check_bounds(inst, newpos, &movable))
+	{
 		dec_move(inst, step);
+		inst->moves++;
+	}
 	check_collectibles(inst, newpos);
 	check_exit(inst, newpos);
+	put_moves(inst);
 }

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 10:32:05 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 11:53:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	game_over(t_instance *inst)
 	mlx_delete_image(inst->mlx, inst->img.floor);
 	mlx_delete_image(inst->mlx, inst->img.wall);
 	mlx_delete_image(inst->mlx, inst->img.info);
-	mlx_put_string(inst->mlx, "YOU WON", 0, 0);
+	mlx_put_string(inst->mlx, "YOU WIN", 0, 0);
 	inst->won = true;
 }
 
@@ -98,7 +98,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	t_instance	inst;
 
 	inst = (t_instance){.mlx = NULL, .map = NULL, .map_cpy = NULL, .num_c = 0,
-						.won = false};
+						.won = false, .moves = 0};
 	if (argc < 2)
 		ft_err(&inst, NO_MAP);
 	parse_map(argv[1], &inst);

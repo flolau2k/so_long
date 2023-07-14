@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 10:51:39 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 11:53:44 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_instance
 	bool	won;
 	t_point	rel_map_pos;
 	t_point	window_size;
+	size_t	moves;
 }	t_instance;
 
 // parser.c
@@ -129,6 +130,7 @@ mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size);
 void		load_images(t_instance *inst);
 void		my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos);
 void		put_image_to_window(t_instance *inst, t_point pos);
+bool	in_window(t_instance *inst, mlx_image_t *img, t_point px);
 
 // so_long.c
 void	game_over(t_instance *inst);
