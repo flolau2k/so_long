@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 09:05:31 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 10:32:05 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,15 @@ void	render_map(t_instance *inst)
 	my_im_to_window(inst, inst->img.player, inst->ppos);
 }
 
+void	resize_hook(int32_t width, int32_t height, void *param)
+{
+	t_instance	*inst;
+
+	inst = param;
+	inst->window_size.x = width;
+	inst->window_size.y = height;
+}
+
 int32_t	main(int32_t argc, const char *argv[])
 {
 	t_instance	inst;
@@ -98,6 +107,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	get_psize(&inst);
 	render_map(&inst);
 	mlx_loop_hook(inst.mlx, &ft_hook, &inst);
+	mlx_resize_hook(inst.mlx, &resize_hook, &inst);
 	mlx_loop(inst.mlx);
 	mlx_terminate(inst.mlx);
 	return (EXIT_SUCCESS);

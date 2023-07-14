@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 09:35:51 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 10:51:39 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # define HEIGHT 768
 
 # define TILE_S 48
-# define SENSITIVITY 9
+# define SENSITIVITY 5
+# define MARGIN 20
 
 # define MULT_START "Multiple starting positions not allowed!"
 # define MULT_EXIT "Multiple exits are not allowed!"
@@ -95,6 +96,7 @@ typedef struct s_instance
 	int		num_c;
 	bool	won;
 	t_point	rel_map_pos;
+	t_point	window_size;
 }	t_instance;
 
 // parser.c
@@ -110,7 +112,8 @@ void	ft_err(t_instance *inst, const char *message);
 
 // movements.c
 bool	movable(t_instance *inst, t_point px);
-bool	check_bounds(t_instance *inst, t_point	pos);
+bool	check_bounds(t_instance *inst, t_point pos,
+					bool (*f)(t_instance *inst, t_point px));
 void	move_player(t_instance *inst, t_point step);
 void	move(t_instance *inst, t_point step);
 

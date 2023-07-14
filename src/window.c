@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:41:12 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/13 16:31:15 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 10:19:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_mlx(t_instance *inst)
 	inst->mlx = mlx_init(WIDTH, HEIGHT, "So long ...", true);
 	if (!inst->mlx)
 		ft_err(inst, mlx_strerror(mlx_errno));
+	inst->window_size = (t_point){.x = WIDTH, .y = HEIGHT};
 }
 
 mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size)
@@ -49,8 +50,10 @@ void	load_images(t_instance *inst)
 
 void	my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos)
 {
-	if (mlx_image_to_window(inst->mlx, img,
-		pos.x * TILE_S, pos.y * TILE_S) == -1)
+	t_point	px;
+
+	px = pos_to_px(inst->rel_map_pos, pos);
+	if (mlx_image_to_window(inst->mlx, img, px.x, px.y) == -1)
 		ft_err(inst, mlx_strerror(mlx_errno));
 }
 
