@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:39:35 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 09:35:11 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 13:13:16 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,14 @@ t_point	substract_point(t_point p1, t_point p2)
 
 	ret.x = p1.x - p2.x;
 	ret.y = p1.y - p2.y;
+	return (ret);
+}
+
+t_point	scalar_multiply(t_point p1, int32_t scale)
+{
+	t_point	ret;
+
+	ret.x = p1.x * scale;
+	ret.y = p1.y * scale;
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 11:53:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 13:41:29 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,26 @@ void	resize_hook(int32_t width, int32_t height, void *param)
 	inst->window_size.y = height;
 }
 
+void	set_window_size(t_instance *inst)
+{
+	t_point	monitor_size;
+	t_point	map_size;
+	t_point	ws;
+
+	mlx_get_monitor_size(0, &monitor_size.x, &monitor_size.y);
+	map_size = scalar_multiply(inst->size, TILE_S);
+	if (map_size.x > monitor_size.x)
+		ws.x = monitor_size.x;
+	else
+		ws.x = map_size.x;
+	if (map_size.y > monitor_size.y)
+		ws.y = monitor_size.y;
+	else
+		ws.y = map_size.y;
+	mlx_set_window_size(inst->mlx, ws.x, ws.y);
+	mlx_set_window_limit(inst->mlx, ws.x, ws.y, ws.x, ws.y);
+}
+
 int32_t	main(int32_t argc, const char *argv[])
 {
 	t_instance	inst;
@@ -108,6 +128,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	render_map(&inst);
 	mlx_loop_hook(inst.mlx, &ft_hook, &inst);
 	mlx_resize_hook(inst.mlx, &resize_hook, &inst);
+	set_window_size(&inst);
 	mlx_loop(inst.mlx);
 	mlx_terminate(inst.mlx);
 	return (EXIT_SUCCESS);

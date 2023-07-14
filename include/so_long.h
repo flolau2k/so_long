@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 11:53:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 13:34:07 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define WIDTH 1024
 # define HEIGHT 768
+# define MIN_W 480
+# define MIN_H 320
 
 # define TILE_S 48
 # define SENSITIVITY 5
@@ -123,6 +125,7 @@ t_point	px_to_pos(t_point rel_map_pos, t_point px);
 t_point	pos_to_px(t_point rel_map_pos, t_point pos);
 t_point	add_pos(t_point p1, t_point p2);
 t_point	substract_point(t_point p1, t_point p2);
+t_point	scalar_multiply(t_point p1, int32_t scale);
 
 // window.c
 void		init_mlx(t_instance *inst);

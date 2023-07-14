@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:38:04 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 11:55:43 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/14 13:53:00 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,19 +109,12 @@ void	check_exit(t_instance *inst, t_point pos)
 void	move_all_instances(t_instance *inst, mlx_image_t *img, t_point step)
 {
 	size_t	i;
-	// t_point	new_px;
 
 	i = 0;
 	while (i < img->count)
 	{
 		img->instances[i].x -= step.x;
 		img->instances[i].y -= step.y;
-		// new_px.x = img->instances[i].x;
-		// new_px.y = img->instances[i].y;
-		// if (img->instances[i].enabled && !in_window(inst, img, new_px))
-		// 	img->instances[i].enabled = false;
-		// else if (!img->instances[i].enabled && in_window(inst, img, new_px))
-		// 	img->instances[i].enabled = true;
 		i++;
 	}
 }
