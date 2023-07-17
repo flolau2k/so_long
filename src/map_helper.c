@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 13:14:25 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 13:14:52 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 14:20:25 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	get_size(t_instance *inst)
 	inst->size.y++;
 	while (inst->map[inst->size.y])
 	{
-		if (ft_strlen(inst->map[inst->size.y]) != inst->size.x)
+		if ((int) ft_strlen(inst->map[inst->size.y]) != inst->size.x)
 			ft_err(inst, MAP_RECT);
 		inst->size.y++;
 	}

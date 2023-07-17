@@ -6,15 +6,14 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 11:17:07 by flauer            #+#    #+#              #
-#    Updated: 2023/07/17 14:09:45 by flauer           ###   ########.fr        #
+#    Updated: 2023/07/17 14:19:02 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		so_long
 
 CC =		cc
-CFLAGS =	-g 
-#-Wall -Wextra -Werror
+CFLAGS =	-g -Wall -Wextra -Werror
 
 LIBFTDIR =	libft
 LIBMLXDIR =	MLX42

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 13:53:43 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 14:19:21 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	find_start_pos_and_check(t_instance *inst)
 void	parse_map(const char *path, t_instance *inst)
 {
 	int		file;
-	char	*line;
 	int		num_lines;
 
 	num_lines = 0;
