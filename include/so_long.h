@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 14:41:07 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 15:13:35 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ void		ft_err(t_instance *inst, const char *message);
 void		collect_item(t_instance *inst, t_point pos);
 t_point		check_bounds(t_instance *inst, t_point pos,
 				bool (*f)(t_instance *inst, t_point px));
-void		move_player(t_instance *inst, t_point step);
 void		move(t_instance *inst, t_point step);
 
 // move_helper.c
@@ -157,7 +156,6 @@ void		render_movements(t_instance *inst);
 
 // so_long.c
 void		game_over(t_instance *inst);
-void		init_mlx(t_instance *inst);
 
 // initializers.c
 void		init_t_img(t_img *img);

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:38:04 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 14:17:00 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 15:11:51 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	collect_item(t_instance *inst, t_point pos)
 	}
 }
 
-t_bounds	get_bounds(mlx_image_t *img, t_point pos)
+static t_bounds	get_bounds(mlx_image_t *img, t_point pos)
 {
 	t_bounds	ret;
 

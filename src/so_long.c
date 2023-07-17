@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 15:06:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 15:13:33 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	game_over(t_instance *inst)
 	mlx_put_string(inst->mlx, "YOU WIN", 0, 0);
 }
 
-void	ft_hook(void *param)
+static void	ft_hook(void *param)
 {
 	t_instance	*inst;
 
@@ -47,7 +47,7 @@ void	ft_hook(void *param)
 		move(inst, (t_point){.x = SENSITIVITY, .y = 0});
 }
 
-void	init_mlx(t_instance *inst)
+static void	init_mlx(t_instance *inst)
 {
 	inst->mlx = mlx_init(WIDTH, HEIGHT, "So long ...", false);
 	set_window_size(inst);
