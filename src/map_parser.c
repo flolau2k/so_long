@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 14:27:33 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 14:45:15 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,4 @@ void	parse_map(const char *path, t_instance *inst)
 	close(file);
 	check_map(inst);
 	free_map(&inst->map_cpy);
-	inst->rel_map_pos = (t_point){.x = 0, .y = 0};
 }
