@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 09:49:51 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 10:29:21 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_img
 	mlx_image_t	*coll_o;
 	mlx_image_t	*coll_c;
 	mlx_image_t	*info;
+	mlx_image_t	*move_c;
 }	t_img;
 
 typedef struct s_instance
@@ -96,6 +97,7 @@ typedef struct s_instance
 	int		num_c;
 	bool	won;
 	t_point	rel_map_pos;
+	t_point	window_s;
 	size_t	moves;
 }	t_instance;
 

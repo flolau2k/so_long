@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:38:04 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 09:28:50 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 10:08:58 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,6 @@ void	move_player(t_instance *inst, t_point step)
 	inst->img.player->instances[0].y += step.y;
 }
 
-void	put_moves(t_instance *inst)
-{
-	ft_printf("Move count: %u\n", inst->moves);
-}
-
 void	move(t_instance *inst, t_point step)
 {
 	t_point	oldpos;
@@ -132,5 +127,5 @@ void	move(t_instance *inst, t_point step)
 	}
 	check_collectibles(inst, newpos);
 	check_exit(inst, newpos);
-	put_moves(inst);
+	ft_printf("Move count: %u\n", inst->moves);
 }
