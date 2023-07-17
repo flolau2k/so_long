@@ -72,19 +72,19 @@ void	ft_hook(void *param)
 	t_instance	*inst;
 
 	inst = param;
+	if (mlx_is_key_down(inst->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(inst->mlx);
 	if (inst->won)
 		return ;
 	render_fps(inst);
 	render_movements(inst);
-	if (mlx_is_key_down(inst->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(inst->mlx);
-	if (mlx_is_key_down(inst->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(inst->mlx, MLX_KEY_W) && !inst->won)
 		move(inst, (t_point){.x = 0, .y = -SENSITIVITY});
-	if (mlx_is_key_down(inst->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(inst->mlx, MLX_KEY_S) && !inst->won)
 		move(inst, (t_point){.x = 0, .y = SENSITIVITY});
-	if (mlx_is_key_down(inst->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(inst->mlx, MLX_KEY_A) && !inst->won)
 		move(inst, (t_point){.x = -SENSITIVITY, .y = 0});
-	if (mlx_is_key_down(inst->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(inst->mlx, MLX_KEY_D) && !inst->won)
 		move(inst, (t_point){.x = SENSITIVITY, .y = 0});
 }
 
