@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 11:17:07 by flauer            #+#    #+#              #
-#    Updated: 2023/07/17 14:19:02 by flauer           ###   ########.fr        #
+#    Updated: 2023/07/17 14:41:18 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJDIR =	obj
 SRCDIR =	src
 
 FILES =		so_long.c helper.c movements.c move_helper.c conversions.c \
-			window.c info_display.c textures.c \
+			window.c info_display.c textures.c initializers.c \
 			map_parser.c map_helper.c map_checks.c
 HEADERS =	include/so_long.h
 

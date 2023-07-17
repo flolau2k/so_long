@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 13:25:27 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 14:42:16 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,7 @@ int32_t	main(int32_t argc, const char *argv[])
 {
 	t_instance	inst;
 
-	inst = (t_instance){.mlx = NULL, .map = NULL, .map_cpy = NULL, .num_c = 0,
-		.won = false, .moves = 0};
-	inst.img = (t_img){.wall = NULL, .player = NULL, .floor = NULL,
-		.exit_o = NULL, .exit_c = NULL, .coll_o = NULL, .coll_c = NULL,
-		.info = NULL, .move_c = NULL};
+	init_t_instance(&inst);
 	if (argc < 2)
 		ft_err(&inst, NO_MAP);
 	parse_map(argv[1], &inst);
