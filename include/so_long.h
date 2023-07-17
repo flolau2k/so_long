@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 10:29:21 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 10:44:19 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	parse_map(const char *path, t_instance *inst);
 void	free_map(char ***map);
 bool	is_valid_char(char c);
 bool	compare_points(t_point p1, t_point p2);
+void	free_instance(t_instance *inst);
 
 //error.c
 void	ft_err(t_instance *inst, const char *message);
@@ -132,7 +133,6 @@ mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size);
 void		load_images(t_instance *inst);
 void		my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos);
 void		put_image_to_window(t_instance *inst, t_point pos);
-// bool	in_window(t_instance *inst, mlx_image_t *img, t_point px);
 
 // so_long.c
 void	game_over(t_instance *inst);
