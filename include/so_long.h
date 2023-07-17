@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 13:17:57 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:23:20 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,18 @@ void		free_instance(t_instance *inst);
 void		ft_err(t_instance *inst, const char *message);
 
 // movements.c
-bool		movable(t_instance *inst, t_point px);
+void		collect_item(t_instance *inst, t_point pos);
 bool		check_bounds(t_instance *inst, t_point pos,
 				bool (*f)(t_instance *inst, t_point px));
 void		move_player(t_instance *inst, t_point step);
 void		move(t_instance *inst, t_point step);
+
+// move_helper.c
+bool		movable(t_instance *inst, t_point px);
+void		collectible(t_instance *inst, t_point px);
+void		is_exit(t_instance *inst, t_point px);
+void		check_collectibles(t_instance *inst, t_point pos);
+void		check_exit(t_instance *inst, t_point pos);
 
 // conversions.c
 t_point		px_to_pos(t_point rel_map_pos, t_point px);
