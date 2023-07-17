@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 13:23:20 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 14:17:55 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define HEIGHT 320
 
 # define TILE_S 48
-# define SENSITIVITY 5
+# define SENSITIVITY 9
 
 # define MULT_START "Multiple starting positions not allowed!"
 # define MULT_EXIT "Multiple exits are not allowed!"
@@ -121,7 +121,7 @@ void		ft_err(t_instance *inst, const char *message);
 
 // movements.c
 void		collect_item(t_instance *inst, t_point pos);
-bool		check_bounds(t_instance *inst, t_point pos,
+t_point		check_bounds(t_instance *inst, t_point pos,
 				bool (*f)(t_instance *inst, t_point px));
 void		move_player(t_instance *inst, t_point step);
 void		move(t_instance *inst, t_point step);
@@ -138,7 +138,7 @@ t_point		px_to_pos(t_point rel_map_pos, t_point px);
 t_point		pos_to_px(t_point rel_map_pos, t_point pos);
 t_point		add_pos(t_point p1, t_point p2);
 t_point		substract_point(t_point p1, t_point p2);
-t_point		scalar_multiply(t_point p1, int32_t scale);
+t_point		scalar_multiply(t_point p1, double scale);
 
 // window.c
 void		set_window_size(t_instance *inst);

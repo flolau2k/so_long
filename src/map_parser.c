@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 13:24:19 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:53:43 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static bool	read_map_line(int file, int *num_lines, char ***map)
 	return (true);
 }
 
-static void	check_start(t_instance *inst, t_point pos)
+static void	check_start_count(t_instance *inst, t_point pos)
 {
 	static bool	found;
 
@@ -47,7 +47,7 @@ static void	check_start(t_instance *inst, t_point pos)
 		ft_err(inst, MULT_START);
 }
 
-static void	check_exit(t_instance *inst, t_point pos)
+static void	check_exit_count(t_instance *inst, t_point pos)
 {
 	static bool	found;
 
@@ -71,8 +71,8 @@ void	find_start_pos_and_check(t_instance *inst)
 			c = inst->map[pos.y][pos.x];
 			if (!ft_strchr(VALID_CHARS, inst->map[pos.y][pos.x]))
 				ft_err(inst, INV_CHAR);
-			check_start(inst, pos);
-			check_exit(inst, pos);
+			check_start_count(inst, pos);
+			check_exit_count(inst, pos);
 			if (inst->map[pos.y][pos.x] == COLL_CHAR)
 				inst->num_c++;
 			pos.x++;
