@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 11:17:07 by flauer            #+#    #+#              #
-#    Updated: 2023/07/14 11:42:08 by flauer           ###   ########.fr        #
+#    Updated: 2023/07/17 11:10:55 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJDIR =	obj
 SRCDIR =	src
 
 FILES =		so_long.c parser.c error.c helper.c movements.c conversions.c \
-			window.c
+			window.c info_display.c
 HEADERS =	include/so_long.h
 
 SRC =		$(addprefix $(SRCDIR)/, $(FILES))

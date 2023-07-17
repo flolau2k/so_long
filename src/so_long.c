@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 10:44:40 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 11:26:19 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,47 +24,6 @@ void	game_over(t_instance *inst)
 	mlx_delete_image(inst->mlx, inst->img.info);
 	mlx_delete_image(inst->mlx, inst->img.move_c);
 	mlx_put_string(inst->mlx, "YOU WIN", 0, 0);
-	// mlx_delete_image(inst->mlx, inst->img.player);
-}
-
-void	render_fps(t_instance *inst)
-{
-	char	*msg;
-	char	*fps;
-	t_point	pos;
-
-	fps = ft_itoa(1/inst->mlx->delta_time);
-	msg = ft_strjoin(fps, " FPS");
-	if (inst->img.info)
-		mlx_delete_image(inst->mlx, inst->img.info);
-	inst->img.info = mlx_put_string(inst->mlx, msg, 0, 0);
-	pos.x = inst->window_s.x - inst->img.info->width;
-	pos.y = inst->window_s.y - inst->img.info->height;
-	inst->img.info->instances[0].x = pos.x;
-	inst->img.info->instances[0].y = pos.y;
-	inst->img.info->instances[0].z = 255;
-	free(msg);
-	free(fps);
-}
-
-void	render_movements(t_instance *inst)
-{
-	char	*msg;
-	char	*mc;
-	t_point	pos;
-
-	mc = ft_itoa(inst->moves);
-	msg = ft_strjoin("Move Count: ", mc);
-	if (inst->img.move_c)
-		mlx_delete_image(inst->mlx, inst->img.move_c);
-	inst->img.move_c = mlx_put_string(inst->mlx, msg, 0, 0);
-	pos.x = 0;
-	pos.y = inst->window_s.y - inst->img.move_c->height;
-	inst->img.move_c->instances[0].x = pos.x;
-	inst->img.move_c->instances[0].y = pos.y;
-	inst->img.move_c->instances[0].z = 255;
-	free(msg);
-	free(mc);
 }
 
 void	ft_hook(void *param)
@@ -88,22 +47,13 @@ void	ft_hook(void *param)
 		move(inst, (t_point){.x = SENSITIVITY, .y = 0});
 }
 
-void	render_map(t_instance *inst)
-{
-	t_point	pos;
 
-	pos = (t_point){.x = 0, .y = 0};
-	while (pos.y < inst->size.y)
-	{
-		pos.x = 0;
-		while (pos.x < inst->size.x)
-		{
-			put_image_to_window(inst, pos);
-			pos.x++;
-		}
-		pos.y++;
-	}
-	my_im_to_window(inst, inst->img.player, inst->ppos);
+static void	init_mlx(t_instance *inst)
+{
+	inst->mlx = mlx_init(WIDTH, HEIGHT, "So long ...", false);
+	set_window_size(inst);
+	if (!inst->mlx)
+		ft_err(inst, mlx_strerror(mlx_errno));
 }
 
 int32_t	main(int32_t argc, const char *argv[])
@@ -119,9 +69,9 @@ int32_t	main(int32_t argc, const char *argv[])
 		ft_err(&inst, NO_MAP);
 	parse_map(argv[1], &inst);
 	init_mlx(&inst);
-	load_images(&inst);
-	inst.psize.x = inst.img.player->width;
-	inst.psize.y = inst.img.player->height;
+	// load_images(&inst);
+	// inst.psize.x = inst.img.player->width;
+	// inst.psize.y = inst.img.player->height;
 	render_map(&inst);
 	mlx_loop_hook(inst.mlx, &ft_hook, &inst);
 	mlx_loop(inst.mlx);
