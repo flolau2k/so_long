@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:38:04 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 13:53:00 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 09:28:50 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,62 +106,10 @@ void	check_exit(t_instance *inst, t_point pos)
 	is_exit(inst, pb.lr);
 }
 
-void	move_all_instances(t_instance *inst, mlx_image_t *img, t_point step)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < img->count)
-	{
-		img->instances[i].x -= step.x;
-		img->instances[i].y -= step.y;
-		i++;
-	}
-}
-
-void	move_map(t_instance *inst, t_point step)
-{
-	inst->rel_map_pos.x += step.x;
-	inst->rel_map_pos.y += step.y;
-	move_all_instances(inst, inst->img.coll_c, step);
-	move_all_instances(inst, inst->img.coll_o, step);
-	move_all_instances(inst, inst->img.exit_c, step);
-	move_all_instances(inst, inst->img.exit_o, step);
-	move_all_instances(inst, inst->img.floor, step);
-	move_all_instances(inst, inst->img.wall, step);
-}
-
 void	move_player(t_instance *inst, t_point step)
 {
 	inst->img.player->instances[0].x += step.x;
 	inst->img.player->instances[0].y += step.y;
-}
-
-void	dec_move(t_instance *inst, t_point step)
-{
-	t_bounds	pb;
-
-	pb.ul.x = inst->img.player->instances[0].x;
-	pb.ul.y = inst->img.player->instances[0].y;
-	pb.ll = add_pos(pb.ul, (t_point){.x = 0, .y = inst->psize.y});
-	pb.ur = add_pos(pb.ul, (t_point){.x = inst->psize.x, .y = 0});
-	pb.lr = add_pos(pb.ul, inst->psize); 
-	if (step.x)
-	{
-		if ((step.x > 0 && inst->window_size.x - pb.ur.x < MARGIN)
-			|| (step.x < 0 && pb.ul.x < MARGIN))
-			move_map(inst, step);
-		else
-			move_player(inst, step);
-	}
-	if (step.y)
-	{
-		if ((step.y > 0 && inst->window_size.y - pb.ll.y < MARGIN)
-			|| (step.y < 0 && pb.ul.y < MARGIN))
-			move_map(inst, step);
-		else
-			move_player(inst, step);
-	}
 }
 
 void	put_moves(t_instance *inst)
@@ -179,7 +127,7 @@ void	move(t_instance *inst, t_point step)
 	newpos = add_pos(oldpos, step);
 	if (check_bounds(inst, newpos, &movable))
 	{
-		dec_move(inst, step);
+		move_player(inst, step);
 		inst->moves++;
 	}
 	check_collectibles(inst, newpos);
