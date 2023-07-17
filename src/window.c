@@ -6,18 +6,32 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:41:12 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 11:42:28 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 09:52:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	set_window_size(t_instance *inst)
+{
+	t_point	monitor_size;
+	t_point	map_size;
+
+	mlx_get_monitor_size(0, &monitor_size.x, &monitor_size.y);
+	map_size = scalar_multiply(inst->size, TILE_S);
+	if (map_size.x > monitor_size.x)
+		ft_err(inst, MAP_TOO_LARGE);
+	if (map_size.y > monitor_size.y)
+		ft_err(inst, MAP_TOO_LARGE);
+	mlx_set_window_size(inst->mlx, map_size.x, map_size.y);
+}
+
 void	init_mlx(t_instance *inst)
 {
-	inst->mlx = mlx_init(WIDTH, HEIGHT, "So long ...", true);
+	inst->mlx = mlx_init(WIDTH, HEIGHT, "So long ...", false);
+	set_window_size(inst);
 	if (!inst->mlx)
 		ft_err(inst, mlx_strerror(mlx_errno));
-	inst->window_size = (t_point){.x = WIDTH, .y = HEIGHT};
 }
 
 mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size)
@@ -55,30 +69,6 @@ void	my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos)
 	px = pos_to_px(inst->rel_map_pos, pos);
 	if (mlx_image_to_window(inst->mlx, img, px.x, px.y) == -1)
 		ft_err(inst, mlx_strerror(mlx_errno));
-}
-
-static bool	px_in_window(t_instance *inst, t_point px)
-{
-	if (px.x >= 0 && px.x <= inst->window_size.x 
-		&& px.y >= 0 && px.y <= inst->window_size.y)
-		return (true);
-	return (false);
-}
-
-bool	in_window(t_instance *inst, mlx_image_t *img, t_point px)
-{
-	t_bounds	bounds;
-	t_point		size;
-
-	size = (t_point){.x = img->width, .y = img->height};
-	bounds.ul = px;
-	bounds.ll = (t_point){.x = px.x, .y = px.x + size.y};
-	bounds.ur = (t_point){.x = px.x + size.x, .y = px.y};
-	bounds.lr = add_pos(px, size);
-	if (px_in_window(inst, bounds.ul) || px_in_window(inst, bounds.ll)
-		|| px_in_window(inst, bounds.ur) || px_in_window(inst, bounds.lr))
-		return (true);
-	return (false);
 }
 
 void	put_image_to_window(t_instance *inst, t_point pos)

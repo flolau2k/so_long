@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 11:42:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 09:37:57 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,13 @@ static void	check_surrounding(t_instance *inst, t_point pos)
 		return ;
 	if (pos.y > 0 && inst->map_cpy[pos.y - 1][pos.x] == FILL_CHAR)
 		return ;
-	if (pos.y < inst->size.y - 1 && inst->map_cpy[pos.y + 1][pos.x] == FILL_CHAR)
+	if (pos.y < inst->size.y - 1
+		&& inst->map_cpy[pos.y + 1][pos.x] == FILL_CHAR)
 		return ;
 	if (pos.x > 0 && inst->map_cpy[pos.y][pos.x - 1] == FILL_CHAR)
 		return ;
-	if (pos.x < inst->size.x - 1 && inst->map_cpy[pos.y][pos.x + 1] == FILL_CHAR)
+	if (pos.x < inst->size.x - 1
+		&& inst->map_cpy[pos.y][pos.x + 1] == FILL_CHAR)
 		return ;
 	if (inst->map_cpy[pos.y][pos.x] == COLL_CHAR)
 		ft_err(inst, NO_ROUTE_C);

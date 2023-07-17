@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 09:28:52 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 09:49:51 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@
 # include <MLX42/MLX42.h>
 # include "libft.h"
 
-# define WIDTH 1024
-# define HEIGHT 768
-# define MIN_W 480
-# define MIN_H 320
+# define WIDTH 480
+# define HEIGHT 320
 
 # define TILE_S 48
 # define SENSITIVITY 5
@@ -38,6 +36,7 @@
 # define MAP_EMPTY "Map is empty!"
 # define NO_MAP "No map file given!"
 # define MAP_NC "Map is not closed!"
+# define MAP_TOO_LARGE "Map is too large!"
 # define MAP_EXT "Map file is not a .ber file!"
 # define MALLOC_ERROR "Malloc error occured!"
 # define VALID_CHARS "01CEP"
@@ -97,7 +96,6 @@ typedef struct s_instance
 	int		num_c;
 	bool	won;
 	t_point	rel_map_pos;
-	t_point	window_size;
 	size_t	moves;
 }	t_instance;
 
@@ -132,7 +130,7 @@ mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size);
 void		load_images(t_instance *inst);
 void		my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos);
 void		put_image_to_window(t_instance *inst, t_point pos);
-bool	in_window(t_instance *inst, mlx_image_t *img, t_point px);
+// bool	in_window(t_instance *inst, mlx_image_t *img, t_point px);
 
 // so_long.c
 void	game_over(t_instance *inst);
