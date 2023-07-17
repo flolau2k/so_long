@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 15:13:35 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 18:17:29 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define NO_COLL "No Collectibles in the Map!"
 # define NO_MAP "No map file given!"
 # define MAP_NC "Map is not closed!"
+# define NO_START "No Player start position defined!"
+# define NO_EXIT "Map has no Exit!"
 # define MAP_TOO_LARGE "Map is too large!"
 # define MAP_EXT "Map file is not a .ber file!"
 # define VALID_CHARS "01CEP"

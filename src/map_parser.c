@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 15:16:15 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 18:18:59 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,36 @@ static bool	read_map_line(int file, int *num_lines, char ***map)
 	return (true);
 }
 
-static void	check_start_count(t_instance *inst, t_point pos)
+static int	check_start_count(t_instance *inst, t_point pos)
 {
-	static bool	found;
+	static int	count;
 
-	if (inst->map[pos.y][pos.x] == PLAYER_CHAR && !found)
+	if (inst->map[pos.y][pos.x] == PLAYER_CHAR && count == 0)
 	{
-		found = true;
+		count++;
 		inst->ppos = (t_point){.x = pos.x, .y = pos.y};
 	}
-	else if (inst->map[pos.y][pos.x] == PLAYER_CHAR && found)
+	else if (inst->map[pos.y][pos.x] == PLAYER_CHAR && count > 0)
 		ft_err(inst, MULT_START);
+	return (count);
 }
 
-static void	check_exit_count(t_instance *inst, t_point pos)
+static int	check_exit_count(t_instance *inst, t_point pos)
 {
-	static bool	found;
+	static int	count;
 
-	if (inst->map[pos.y][pos.x] == EXIT_CHAR && !found)
-		found = true;
-	else if (inst->map[pos.y][pos.x] == EXIT_CHAR && found)
+	if (inst->map[pos.y][pos.x] == EXIT_CHAR && count == 0)
+		count++;
+	else if (inst->map[pos.y][pos.x] == EXIT_CHAR && count > 0)
 		ft_err(inst, MULT_EXIT);
+	return (count);
 }
 
 void	find_start_pos_and_check(t_instance *inst)
 {
 	t_point	pos;
-	char	c;
+	int		num_e;
+	int		num_p;
 
 	pos = (t_point){.x = 0, .y = 0};
 	while (pos.y < inst->size.y)
@@ -68,19 +71,20 @@ void	find_start_pos_and_check(t_instance *inst)
 		pos.x = 0;
 		while (pos.x < inst->size.x)
 		{
-			c = inst->map[pos.y][pos.x];
 			if (!ft_strchr(VALID_CHARS, inst->map[pos.y][pos.x]))
 				ft_err(inst, INV_CHAR);
-			check_start_count(inst, pos);
-			check_exit_count(inst, pos);
+			num_p = check_start_count(inst, pos);
+			num_e = check_exit_count(inst, pos);
 			if (inst->map[pos.y][pos.x] == COLL_CHAR)
 				inst->num_c++;
 			pos.x++;
 		}
 		pos.y++;
 	}
-	if (inst->num_c == 0)
-		ft_err(inst, NO_COLL);
+	if (num_p == 0)
+		ft_err(inst, NO_START);
+	if (num_e == 0)
+		ft_err(inst, NO_EXIT);
 }
 
 void	parse_map(const char *path, t_instance *inst)

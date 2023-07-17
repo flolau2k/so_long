@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:53:27 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 13:12:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 18:11:08 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	check_map(t_instance *inst)
 		ft_err(inst, MAP_EMPTY);
 	get_size(inst);
 	find_start_pos_and_check(inst);
+	if (inst->num_c == 0)
+		ft_err(inst, NO_COLL);
 	inst->map_cpy = copy_map(inst);
 	fill_rec(inst, inst->ppos);
 	check_borders(inst);

@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 11:17:07 by flauer            #+#    #+#              #
-#    Updated: 2023/07/17 14:41:18 by flauer           ###   ########.fr        #
+#    Updated: 2023/07/17 18:04:45 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFTDIR =	libft
 LIBMLXDIR =	MLX42
 LIBFT =		$(LIBFTDIR)/libft.a
 LIBMLX =	$(LIBMLXDIR)/build/libmlx42.a
-LIBS =		$(LIBFT) $(LIBMLX) -ldl -lglfw -pthread -lm
+LIBS =		$(LIBFT) $(LIBMLX) -ldl -lglfw -pthread -lm -L${HOME}/.brew/lib
 
 INCLUDES =	-I$(LIBMLXDIR)/include -I$(LIBFTDIR)/include -Iinclude
 
