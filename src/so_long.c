@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 13:41:29 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 09:12:04 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	game_over(t_instance *inst)
 {
+	inst->won = true;
 	mlx_delete_image(inst->mlx, inst->img.coll_c);
 	mlx_delete_image(inst->mlx, inst->img.coll_o);
 	mlx_delete_image(inst->mlx, inst->img.exit_c);
@@ -23,7 +24,6 @@ void	game_over(t_instance *inst)
 	mlx_delete_image(inst->mlx, inst->img.wall);
 	mlx_delete_image(inst->mlx, inst->img.info);
 	mlx_put_string(inst->mlx, "YOU WIN", 0, 0);
-	inst->won = true;
 }
 
 void	get_psize(t_instance *inst)
