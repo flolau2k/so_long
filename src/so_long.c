@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 15:03:25 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 15:06:02 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,10 @@ void	init_mlx(t_instance *inst)
 		ft_err(inst, mlx_strerror(mlx_errno));
 }
 
-void	leaks_check(void)
-{
-	system("leaks so_long");
-}
-
 int32_t	main(int32_t argc, const char *argv[])
 {
 	t_instance	inst;
 
-	atexit(leaks_check);
 	init_t_instance(&inst);
 	if (argc < 2)
 		ft_err(&inst, NO_MAP);
