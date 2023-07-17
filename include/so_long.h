@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 14:17:55 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 14:27:30 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define INV_CHAR "Map contains invalid chars!"
 # define MAP_RECT "Map is not rectangular!"
 # define MAP_EMPTY "Map is empty!"
+# define NO_COLL "No Collectibles in the Map!"
 # define NO_MAP "No map file given!"
 # define MAP_NC "Map is not closed!"
 # define MAP_TOO_LARGE "Map is too large!"

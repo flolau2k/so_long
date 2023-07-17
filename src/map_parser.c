@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 14:19:21 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 14:27:33 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	find_start_pos_and_check(t_instance *inst)
 		}
 		pos.y++;
 	}
+	if (inst->num_c == 0)
+		ft_err(inst, NO_COLL);
 }
 
 void	parse_map(const char *path, t_instance *inst)
