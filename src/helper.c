@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:51:38 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 10:45:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 12:51:37 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,12 @@ void	free_instance(t_instance *inst)
 		free_map(&inst->map_cpy);
 		inst->map_cpy = NULL;
 	}
+}
+
+void	ft_err(t_instance *inst, const char *message)
+{
+	free_instance(inst);
+	if (message)
+		ft_printf("Error\n%s\n", message);
+	exit(EXIT_FAILURE);
 }

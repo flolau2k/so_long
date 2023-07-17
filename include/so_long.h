@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 11:10:40 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:17:57 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
+# include <errno.h>
 # include <stdlib.h>
 # include <MLX42/MLX42.h>
 # include "libft.h"
@@ -38,7 +39,6 @@
 # define MAP_NC "Map is not closed!"
 # define MAP_TOO_LARGE "Map is too large!"
 # define MAP_EXT "Map file is not a .ber file!"
-# define MALLOC_ERROR "Malloc error occured!"
 # define VALID_CHARS "01CEP"
 # define CHECK_CHARS "CE"
 # define MOVABLE_CHARS "P0CE"
@@ -58,7 +58,7 @@
 # define COLL_C "./assets/chest_closed.png"
 
 // for map points
-typedef struct	s_point
+typedef struct s_point
 {
 	int	x;
 	int	y;
@@ -101,44 +101,54 @@ typedef struct s_instance
 	size_t	moves;
 }	t_instance;
 
-// parser.c
-void	parse_map(const char *path, t_instance *inst);
+// map_parser.c
+void		parse_map(const char *path, t_instance *inst);
+void		find_start_pos_and_check(t_instance *inst);
+
+// map_helper.c
+void		get_size(t_instance *inst);
+char		**copy_map(t_instance *inst);
+
+// map_checks.c
+void		check_map(t_instance *inst);
 
 // helper.c
-void	free_map(char ***map);
-bool	is_valid_char(char c);
-bool	compare_points(t_point p1, t_point p2);
-void	free_instance(t_instance *inst);
-
-//error.c
-void	ft_err(t_instance *inst, const char *message);
+void		free_map(char ***map);
+bool		is_valid_char(char c);
+bool		compare_points(t_point p1, t_point p2);
+void		free_instance(t_instance *inst);
+void		ft_err(t_instance *inst, const char *message);
 
 // movements.c
-bool	movable(t_instance *inst, t_point px);
-bool	check_bounds(t_instance *inst, t_point pos,
-					bool (*f)(t_instance *inst, t_point px));
-void	move_player(t_instance *inst, t_point step);
-void	move(t_instance *inst, t_point step);
+bool		movable(t_instance *inst, t_point px);
+bool		check_bounds(t_instance *inst, t_point pos,
+				bool (*f)(t_instance *inst, t_point px));
+void		move_player(t_instance *inst, t_point step);
+void		move(t_instance *inst, t_point step);
 
 // conversions.c
-t_point	px_to_pos(t_point rel_map_pos, t_point px);
-t_point	pos_to_px(t_point rel_map_pos, t_point pos);
-t_point	add_pos(t_point p1, t_point p2);
-t_point	substract_point(t_point p1, t_point p2);
-t_point	scalar_multiply(t_point p1, int32_t scale);
+t_point		px_to_pos(t_point rel_map_pos, t_point px);
+t_point		pos_to_px(t_point rel_map_pos, t_point pos);
+t_point		add_pos(t_point p1, t_point p2);
+t_point		substract_point(t_point p1, t_point p2);
+t_point		scalar_multiply(t_point p1, int32_t scale);
 
 // window.c
-void		init_mlx(t_instance *inst);
+void		set_window_size(t_instance *inst);
+
+// textures.c
 mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size);
 void		load_images(t_instance *inst);
 void		my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos);
 void		put_image_to_window(t_instance *inst, t_point pos);
+void		render_map(t_instance *inst);
 
 // info_display.c
-void	render_fps(t_instance *inst);
-void	render_movements(t_instance *inst);
+void		render_fps(t_instance *inst);
+void		render_movements(t_instance *inst);
 
 // so_long.c
-void	game_over(t_instance *inst);
+void		game_over(t_instance *inst);
+void		init_mlx(t_instance *inst);
 
 #endif

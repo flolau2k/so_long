@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 11:26:19 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 12:48:03 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	ft_hook(void *param)
 		move(inst, (t_point){.x = SENSITIVITY, .y = 0});
 }
 
-
-static void	init_mlx(t_instance *inst)
+void	init_mlx(t_instance *inst)
 {
 	inst->mlx = mlx_init(WIDTH, HEIGHT, "So long ...", false);
 	set_window_size(inst);
