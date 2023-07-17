@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:41:12 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 13:19:36 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:26:04 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	set_window_size(t_instance *inst)
 		ft_err(inst, MAP_TOO_LARGE);
 	if (map_size.y > monitor_size.y)
 		ft_err(inst, MAP_TOO_LARGE);
-	inst->window_s =(t_point){.x = map_size.x, .y = map_size.y};
+	inst->window_s = (t_point){.x = map_size.x, .y = map_size.y};
 	mlx_set_window_size(inst->mlx, map_size.x, map_size.y);
 }

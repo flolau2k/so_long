@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:38:04 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 13:21:29 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:25:18 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	collect_item(t_instance *inst, t_point pos)
 {
-	size_t		i;
+	size_t	i;
 	t_point	px;
 
 	i = 0;
 	while (i < inst->img.coll_c->count)
 	{
 		px = (t_point){.x = inst->img.coll_c->instances[i].x,
-						.y = inst->img.coll_c->instances[i].y};
+			.y = inst->img.coll_c->instances[i].y};
 		if (compare_points(px_to_pos(inst->rel_map_pos, px), pos))
 		{
 			inst->img.coll_c->instances[i].enabled = false;

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 12:48:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:25:27 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,14 @@ int32_t	main(int32_t argc, const char *argv[])
 	t_instance	inst;
 
 	inst = (t_instance){.mlx = NULL, .map = NULL, .map_cpy = NULL, .num_c = 0,
-						.won = false, .moves = 0};
+		.won = false, .moves = 0};
 	inst.img = (t_img){.wall = NULL, .player = NULL, .floor = NULL,
-				.exit_o = NULL, .exit_c = NULL, .coll_o = NULL, .coll_c = NULL,
-				.info = NULL, .move_c = NULL};
+		.exit_o = NULL, .exit_c = NULL, .coll_o = NULL, .coll_c = NULL,
+		.info = NULL, .move_c = NULL};
 	if (argc < 2)
 		ft_err(&inst, NO_MAP);
 	parse_map(argv[1], &inst);
 	init_mlx(&inst);
-	// load_images(&inst);
-	// inst.psize.x = inst.img.player->width;
-	// inst.psize.y = inst.img.player->height;
 	render_map(&inst);
 	mlx_loop_hook(inst.mlx, &ft_hook, &inst);
 	mlx_loop(inst.mlx);

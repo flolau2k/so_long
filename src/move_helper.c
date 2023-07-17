@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 13:20:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 13:21:19 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:24:28 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	is_exit(t_instance *inst, t_point px)
 	if (inst->map[map_pos.y][map_pos.x] == EXIT_CHAR)
 		game_over(inst);
 }
-
 
 void	check_collectibles(t_instance *inst, t_point pos)
 {

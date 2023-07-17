@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:09:53 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 11:10:22 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:24:12 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	render_fps(t_instance *inst)
 	char	*fps;
 	t_point	pos;
 
-	fps = ft_itoa(1/inst->mlx->delta_time);
+	fps = ft_itoa(1 / inst->mlx->delta_time);
 	msg = ft_strjoin(fps, " FPS");
 	if (inst->img.info)
 		mlx_delete_image(inst->mlx, inst->img.info);

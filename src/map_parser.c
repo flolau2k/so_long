@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 13:15:21 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:24:19 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static bool	read_map_line(int file, int *num_lines, char ***map)
 	free(line);
 	return (true);
 }
-
 
 static void	check_start(t_instance *inst, t_point pos)
 {

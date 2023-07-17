@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:23:21 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 11:26:04 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 13:25:52 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ mlx_image_t	*png_to_image(t_instance *inst, char *path, uint32_t size)
 
 void	load_images(t_instance *inst)
 {
-	inst->img.player	= png_to_image(inst, PLAYER, TILE_S * 0.8);
-	inst->img.wall		= png_to_image(inst, WALL, TILE_S);
-	inst->img.floor		= png_to_image(inst, FLOOR, TILE_S);
-	inst->img.exit_c	= png_to_image(inst, EXIT_C, TILE_S);
-	inst->img.exit_o	= png_to_image(inst, EXIT_O, TILE_S);
-	inst->img.coll_c	= png_to_image(inst, COLL_C, TILE_S);
-	inst->img.coll_o	= png_to_image(inst, COLL_O, TILE_S);
+	inst->img.player = png_to_image(inst, PLAYER, TILE_S * 0.8);
+	inst->img.wall = png_to_image(inst, WALL, TILE_S);
+	inst->img.floor = png_to_image(inst, FLOOR, TILE_S);
+	inst->img.exit_c = png_to_image(inst, EXIT_C, TILE_S);
+	inst->img.exit_o = png_to_image(inst, EXIT_O, TILE_S);
+	inst->img.coll_c = png_to_image(inst, COLL_C, TILE_S);
+	inst->img.coll_o = png_to_image(inst, COLL_O, TILE_S);
 }
 
 void	my_im_to_window(t_instance *inst, mlx_image_t *img, t_point pos)
