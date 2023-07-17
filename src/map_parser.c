@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 14:45:15 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 15:16:15 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	parse_map(const char *path, t_instance *inst)
 		&& ft_strncmp(path + ft_strlen(path) - ft_strlen(".ber"), ".ber", 4))
 		ft_err(inst, MAP_EXT);
 	file = open(path, O_RDONLY);
+	if (file == -1)
+		ft_err(inst, strerror(errno));
 	if (!read_map_line(file, &num_lines, &inst->map))
 		ft_err(inst, strerror(errno));
 	close(file);
