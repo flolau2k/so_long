@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/14 13:34:07 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 09:28:52 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 
 # define TILE_S 48
 # define SENSITIVITY 5
-# define MARGIN 20
 
 # define MULT_START "Multiple starting positions not allowed!"
 # define MULT_EXIT "Multiple exits are not allowed!"
