@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 18:17:29 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/19 09:34:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,22 @@
 # define HEIGHT 320
 
 # define TILE_S 48
-# define SENSITIVITY 9
+# define SENSITIVITY 8
 
-# define MULT_START "Multiple starting positions not allowed!"
-# define MULT_EXIT "Multiple exits are not allowed!"
-# define NO_ROUTE_E "No route to exit!"
-# define NO_ROUTE_C "No route to all collectibles!"
-# define INV_CHAR "Map contains invalid chars!"
-# define MAP_RECT "Map is not rectangular!"
-# define MAP_EMPTY "Map is empty!"
-# define NO_COLL "No Collectibles in the Map!"
-# define NO_MAP "No map file given!"
-# define MAP_NC "Map is not closed!"
-# define NO_START "No Player start position defined!"
-# define NO_EXIT "Map has no Exit!"
-# define MAP_TOO_LARGE "Map is too large!"
-# define MAP_EXT "Map file is not a .ber file!"
+# define MULT_START "Multiple starting positions not allowed"
+# define MULT_EXIT "Multiple exits are not allowed"
+# define NO_ROUTE_E "No route to exit"
+# define NO_ROUTE_C "No route to all collectibles"
+# define INV_CHAR "Map contains invalid chars"
+# define MAP_RECT "Map is not rectangular"
+# define MAP_EMPTY "Map is empty"
+# define NO_COLL "No Collectibles in the Map"
+# define NO_MAP "No map file given"
+# define MAP_NC "Map is not closed"
+# define NO_START "No Player start position defined"
+# define NO_EXIT "Map has no Exit"
+# define MAP_TOO_LARGE "Map is too large"
+# define MAP_EXT "Map file is not a .ber file"
 # define VALID_CHARS "01CEP"
 # define CHECK_CHARS "CE"
 # define MOVABLE_CHARS "P0CE"
@@ -109,11 +109,16 @@ void		parse_map(const char *path, t_instance *inst);
 void		find_start_pos_and_check(t_instance *inst);
 
 // map_helper.c
+void		fill_rec(t_instance *inst, t_point begin);
+void		check_surrounding(t_instance *inst, t_point pos);
 void		get_size(t_instance *inst);
 char		**copy_map(t_instance *inst);
 
 // map_checks.c
-void		check_map(t_instance *inst);
+int			check_start_count(t_instance *inst, t_point pos);
+int			check_exit_count(t_instance *inst, t_point pos);
+void		check_borders(t_instance *inst);
+void		check_paths(t_instance *inst);
 
 // helper.c
 void		free_map(char ***map);
