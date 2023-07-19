@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:51:38 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/19 09:56:23 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/17 12:51:37 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,6 @@ bool	compare_points(t_point p1, t_point p2)
 
 void	free_instance(t_instance *inst)
 {
-	free_if_not_null(inst->mlx, &inst->img.coll_c);
-	free_if_not_null(inst->mlx, &inst->img.coll_o);
-	free_if_not_null(inst->mlx, &inst->img.wall);
-	free_if_not_null(inst->mlx, &inst->img.player);
-	free_if_not_null(inst->mlx, &inst->img.floor);
-	free_if_not_null(inst->mlx, &inst->img.exit_c);
-	free_if_not_null(inst->mlx, &inst->img.exit_o);
-	free_if_not_null(inst->mlx, &inst->img.info);
-	free_if_not_null(inst->mlx, &inst->img.move_c);
 	if (inst->map)
 	{
 		free_map(&inst->map);
