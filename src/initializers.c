@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   initializers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:34:25 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 14:40:35 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/19 09:53:33 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	free_if_not_null(mlx_t *mlx, mlx_image_t **img)
+{
+	if (*img)
+		mlx_delete_image(mlx, *img);
+	*img = NULL;
+}
 
 void	init_t_img(t_img *img)
 {
