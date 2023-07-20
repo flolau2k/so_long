@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 15:13:33 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/20 12:04:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int32_t	main(int32_t argc, const char *argv[])
 	init_t_instance(&inst);
 	if (argc < 2)
 		ft_err(&inst, NO_MAP);
+	if (argc > 2)
+		ft_err(&inst, TOO_MANY_ARGS);
 	parse_map(argv[1], &inst);
 	init_mlx(&inst);
 	render_map(&inst);

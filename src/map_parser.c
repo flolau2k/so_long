@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:06:41 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/19 09:28:57 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/20 12:22:16 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,15 @@ void	parse_map(const char *path, t_instance *inst)
 	int		num_lines;
 
 	num_lines = 0;
-	if (path
-		&& ft_strncmp(path + ft_strlen(path) - ft_strlen(".ber"), ".ber", 4))
-		ft_err(inst, MAP_EXT);
 	file = open(path, O_RDONLY);
 	if (file == -1)
 		ft_err(inst, strerror(errno));
+	if (strlen(path) < ft_strlen(".ber")
+		|| ft_strncmp(path + ft_strlen(path) - ft_strlen(".ber"), ".ber", 4))
+	{
+		close(file);
+		ft_err(inst, MAP_EXT);
+	}
 	if (!read_map_line(file, &num_lines, &inst->map))
 		ft_err(inst, strerror(errno));
 	close(file);

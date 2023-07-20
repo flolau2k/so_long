@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/19 09:34:49 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/20 12:04:25 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define NO_EXIT "Map has no Exit"
 # define MAP_TOO_LARGE "Map is too large"
 # define MAP_EXT "Map file is not a .ber file"
+# define TOO_MANY_ARGS "Too many arguments given"
 # define VALID_CHARS "01CEP"
 # define CHECK_CHARS "CE"
 # define MOVABLE_CHARS "P0CE"
