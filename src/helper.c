@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:51:38 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/21 08:50:48 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/21 10:36:00 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,7 @@ void	ft_err(t_instance *inst, const char *message)
 	free_instance(inst);
 	if (message)
 		ft_printf("Error\n%s\n", message);
+	if (inst->mlx)
+		mlx_terminate(inst->mlx);
 	exit(EXIT_FAILURE);
 }
