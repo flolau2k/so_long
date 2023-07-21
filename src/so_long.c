@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:40 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/20 12:04:31 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/21 08:58:16 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	game_over(t_instance *inst)
 {
 	inst->won = true;
-	mlx_delete_image(inst->mlx, inst->img.coll_c);
-	mlx_delete_image(inst->mlx, inst->img.coll_o);
-	mlx_delete_image(inst->mlx, inst->img.exit_c);
-	mlx_delete_image(inst->mlx, inst->img.exit_o);
-	mlx_delete_image(inst->mlx, inst->img.floor);
-	mlx_delete_image(inst->mlx, inst->img.wall);
-	mlx_delete_image(inst->mlx, inst->img.info);
-	mlx_delete_image(inst->mlx, inst->img.move_c);
+	free_img(inst->mlx, &inst->img.coll_c);
+	free_img(inst->mlx, &inst->img.coll_o);
+	free_img(inst->mlx, &inst->img.exit_c);
+	free_img(inst->mlx, &inst->img.exit_o);
+	free_img(inst->mlx, &inst->img.floor);
+	free_img(inst->mlx, &inst->img.wall);
+	free_img(inst->mlx, &inst->img.info);
+	free_img(inst->mlx, &inst->img.move_c);
 	mlx_put_string(inst->mlx, "YOU WIN", 0, 0);
 }
 
@@ -69,7 +69,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	render_map(&inst);
 	mlx_loop_hook(inst.mlx, &ft_hook, &inst);
 	mlx_loop(inst.mlx);
-	mlx_terminate(inst.mlx);
 	free_instance(&inst);
+	mlx_terminate(inst.mlx);
 	return (EXIT_SUCCESS);
 }

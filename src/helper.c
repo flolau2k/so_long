@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:51:38 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/17 12:51:37 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/21 08:50:48 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ bool	compare_points(t_point p1, t_point p2)
 
 void	free_instance(t_instance *inst)
 {
+	free_t_img(inst->mlx, &inst->img);
 	if (inst->map)
 	{
 		free_map(&inst->map);

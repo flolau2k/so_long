@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:59 by flauer            #+#    #+#             */
-/*   Updated: 2023/07/20 12:04:25 by flauer           ###   ########.fr       */
+/*   Updated: 2023/07/21 08:49:38 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,8 @@ void		render_movements(t_instance *inst);
 void		game_over(t_instance *inst);
 
 // initializers.c
+void		free_img(mlx_t *mlx, mlx_image_t **img);
+void		free_t_img(mlx_t *mlx, t_img *img);
 void		init_t_img(t_img *img);
 void		init_t_point(t_point *pt);
 void		init_t_instance(t_instance *inst);
